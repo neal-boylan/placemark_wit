@@ -78,7 +78,7 @@
                     android:padding="8dp"
                     android:text="@string/button_addImage"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textAllCaps="true"
                     tools:ignore="VisualLintButtonSize" />
 
@@ -89,6 +89,19 @@
                     android:importantForAccessibility="no"
                     app:srcCompat="@mipmap/ic_launcher"
                     tools:ignore="ImageContrastCheck" />
+
+                <Button
+                    android:id="@+id/placemarkLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:padding="8dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/button_location"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textAllCaps="true"/>
 
                 <Button
                     android:id="@+id/btnAdd"
