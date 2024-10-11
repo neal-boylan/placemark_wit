@@ -17,7 +17,7 @@ import org.wit.placemark.R
 import org.wit.placemark.databinding.ActivityMapBinding
 import org.wit.placemark.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding
@@ -58,17 +58,36 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         map.setOnMarkerDragListener(this)
     }
 
-    override fun onMarkerDrag(p0: Marker) {
+    override fun onMarkerDrag(marker: Marker) {
+        location.lat = marker.position.latitude
+        location.lng = marker.position.longitude
+        val loc = LatLng(location.lat, location.lng)
 
+        marker.snippet = "GPS : $loc"
     }
 
     override fun onMarkerDragEnd(marker: Marker) {
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
-        location.zoom = map.cameraPosition.zoom
+        val loc = LatLng(location.lat, location.lng)
+
+        marker.snippet = "GPS : $loc"
     }
 
-    override fun onMarkerDragStart(p0: Marker) {
+    override fun onMarkerDragStart(marker: Marker) {
+        location.lat = marker.position.latitude
+        location.lng = marker.position.longitude
+        val loc = LatLng(location.lat, location.lng)
 
+        marker.snippet = "GPS : $loc"
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        location.lat = marker.position.latitude
+        location.lng = marker.position.longitude
+        val loc = LatLng(location.lat, location.lng)
+
+        marker.snippet = "GPS : $loc"
+        return true
     }
 }

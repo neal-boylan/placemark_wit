@@ -25,7 +25,8 @@ class PlacemarkActivity : AppCompatActivity() {
 
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var location = Location(52.245696, -7.139102, 15f)
+    var location = Location(52.245696, -7.139102, 12f)
+    // var location = Location(placemark.lat, placemark.lng, placemark.zoom)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,7 @@ class PlacemarkActivity : AppCompatActivity() {
             Picasso.get()
                 .load(placemark.image)
                 .into(binding.placemarkImage)
+            location = Location(placemark.lat, placemark.lng, placemark.zoom)
             binding.btnAdd.setText(R.string.button_savePlacemark)
         }
 
@@ -130,6 +132,9 @@ class PlacemarkActivity : AppCompatActivity() {
                             //location = result.data!!.extras?.getParcelable("location",Location::class.java)!!
                             location = result.data!!.extras?.getParcelable("location")!!
                             i("Location == $location")
+                            placemark.lat = location.lat
+                            placemark.lng = location.lng
+                            placemark.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { }
