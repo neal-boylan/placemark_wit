@@ -63,6 +63,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     override fun onMarkerDrag(marker: Marker) {
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
+        location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
 
         marker.snippet = "GPS : $loc"
@@ -71,6 +72,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     override fun onMarkerDragEnd(marker: Marker) {
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
+        location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
 
         marker.snippet = "GPS : $loc"
@@ -79,6 +81,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     override fun onMarkerDragStart(marker: Marker) {
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
+        location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
 
         marker.snippet = "GPS : $loc"
@@ -87,6 +90,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     override fun onMarkerClick(marker: Marker): Boolean {
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
+        location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
 
         marker.snippet = "GPS : $loc"
