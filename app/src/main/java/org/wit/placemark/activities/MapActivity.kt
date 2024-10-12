@@ -55,6 +55,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         map.addMarker(options)?.showInfoWindow()
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        map.uiSettings.isZoomControlsEnabled = true
+        map.uiSettings.isZoomGesturesEnabled = true
         map.setOnMarkerDragListener(this)
     }
 
