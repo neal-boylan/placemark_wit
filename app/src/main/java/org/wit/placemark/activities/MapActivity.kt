@@ -17,7 +17,7 @@ import org.wit.placemark.R
 import org.wit.placemark.databinding.ActivityMapBinding
 import org.wit.placemark.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnCameraMoveListener {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding
@@ -52,12 +52,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
             .draggable(true)
             .position(loc)
 
-        map.addMarker(options)?.showInfoWindow()
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.uiSettings.isZoomControlsEnabled = true
         map.uiSettings.isZoomGesturesEnabled = true
+        map.setOnMarkerClickListener(this)
         map.setOnMarkerDragListener(this)
+        map.setOnCameraMoveListener(this)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        map.addMarker(options)?.showInfoWindow()
     }
 
     override fun onMarkerDrag(marker: Marker) {
@@ -65,7 +66,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
-
         marker.snippet = "GPS : $loc"
     }
 
@@ -73,9 +73,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
-        val loc = LatLng(location.lat, location.lng)
-
-        marker.snippet = "GPS : $loc"
     }
 
     override fun onMarkerDragStart(marker: Marker) {
@@ -83,7 +80,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
-
         marker.snippet = "GPS : $loc"
     }
 
@@ -92,8 +88,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
         val loc = LatLng(location.lat, location.lng)
-
         marker.snippet = "GPS : $loc"
-        return true
+        return false
+    }
+
+    override fun onCameraMove() {
+        location.zoom = map.cameraPosition.zoom
     }
 }

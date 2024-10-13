@@ -25,8 +25,6 @@ class PlacemarkActivity : AppCompatActivity() {
 
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var location = Location(52.245696, -7.139102, 12f)
-    // var location = Location(placemark.lat, placemark.lng, placemark.zoom)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +50,7 @@ class PlacemarkActivity : AppCompatActivity() {
             Picasso.get()
                 .load(placemark.image)
                 .into(binding.placemarkImage)
-            location = Location(placemark.lat, placemark.lng, placemark.zoom)
+            // location = Location(placemark.lat, placemark.lng, placemark.zoom)
             binding.btnAdd.setText(R.string.button_savePlacemark)
         }
 
@@ -78,6 +76,12 @@ class PlacemarkActivity : AppCompatActivity() {
         }
 
         binding.placemarkLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (placemark.zoom != 0f) {
+                location.lat =  placemark.lat
+                location.lng = placemark.lng
+                location.zoom = placemark.zoom
+            }
             val launcherIntent = Intent(this, MapActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
@@ -130,7 +134,7 @@ class PlacemarkActivity : AppCompatActivity() {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
                             //location = result.data!!.extras?.getParcelable("location",Location::class.java)!!
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
                             placemark.lat = location.lat
                             placemark.lng = location.lng
