@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.picasso)
     implementation(libs.play.services.maps)
+    implementation(libs.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
