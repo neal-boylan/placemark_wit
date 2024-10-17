@@ -15,6 +15,8 @@ import org.wit.placemark.databinding.ActivityPlacemarkListBinding
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
+private var pos: Int = 0
+
 class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
     lateinit var app: MainApp
@@ -55,9 +57,10 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
             }
         }
 
-    override fun onPlacemarkClick(placemark: PlacemarkModel) {
+    override fun onPlacemarkClick(placemark: PlacemarkModel, position: Int) {
         val launcherIntent = Intent(this, PlacemarkActivity::class.java)
         launcherIntent.putExtra("placemark_edit", placemark)
+        pos = position
         getClickResult.launch(launcherIntent)
     }
 
@@ -65,6 +68,9 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.notifyItemRangeChanged(0,app.placemarks.findAll().size)
             }
-        }
+            else if (it.resultCode == 99) {
+                (binding.recyclerView.adapter)?.notifyItemRemoved(pos)
+            }
+    }
 }
 

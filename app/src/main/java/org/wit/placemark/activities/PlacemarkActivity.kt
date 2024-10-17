@@ -20,6 +20,7 @@ import org.wit.placemark.models.PlacemarkModel
 import timber.log.Timber.i
 
 class PlacemarkActivity : AppCompatActivity() {
+    var edit = false
     private lateinit var binding: ActivityPlacemarkBinding
     var placemark = PlacemarkModel()
     lateinit var app: MainApp
@@ -30,7 +31,7 @@ class PlacemarkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var edit = false
+        // var edit = false
 
         binding = ActivityPlacemarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -99,6 +100,7 @@ class PlacemarkActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_placemark, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -108,11 +110,15 @@ class PlacemarkActivity : AppCompatActivity() {
                 finish()
             }
             R.id.delete_button -> {
-                i("Delete button pressed: $placemark")
+                // ---- lab way of deleting
+                setResult(99)
                 app.placemarks.delete(placemark)
+                finish()
 
-                val launcherIntent = Intent(this, PlacemarkListActivity::class.java)
-                startActivity(launcherIntent)
+                // ---- my way of deleting
+                // app.placemarks.delete(placemark)
+                // val launcherIntent = Intent(this, PlacemarkListActivity::class.java)
+                // startActivity(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
