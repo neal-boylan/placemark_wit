@@ -52,6 +52,9 @@ class PlacemarkActivity : AppCompatActivity() {
             Picasso.get()
                 .load(placemark.image)
                 .into(binding.placemarkImage)
+            if (placemark.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.button_changeImage)
+            }
             // location = Location(placemark.lat, placemark.lng, placemark.zoom)
             binding.btnAdd.setText(R.string.button_savePlacemark)
         }
@@ -136,6 +139,7 @@ class PlacemarkActivity : AppCompatActivity() {
                 Picasso.get()
                     .load(placemark.image)
                     .into(binding.placemarkImage)
+                binding.chooseImage.setText(R.string.button_changeImage)
             }
             catch(e:Exception){
                 e.printStackTrace()

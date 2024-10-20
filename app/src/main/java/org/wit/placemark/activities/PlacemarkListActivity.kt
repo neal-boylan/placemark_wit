@@ -47,6 +47,10 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
                 val launcherIntent = Intent(this, PlacemarkActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, PlacemarkMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -71,6 +75,10 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
             else if (it.resultCode == 99) {
                 (binding.recyclerView.adapter)?.notifyItemRemoved(pos)
             }
+    }
+
+    private val mapIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+
     }
 }
 

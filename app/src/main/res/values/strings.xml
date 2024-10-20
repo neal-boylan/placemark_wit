@@ -14,4 +14,5 @@
     <string name="placemark_thumbnail">Placemark thumbnail</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_placemark_maps">Map of All Placemarks</string>
 </resources>
