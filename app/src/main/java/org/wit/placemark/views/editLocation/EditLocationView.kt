@@ -1,4 +1,4 @@
-package org.wit.placemark.activities
+package org.wit.placemark.views.editLocation
 
 import android.app.Activity
 import android.content.Intent
@@ -17,7 +17,7 @@ import org.wit.placemark.R
 import org.wit.placemark.databinding.ActivityMapBinding
 import org.wit.placemark.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnCameraMoveListener {
+class EditLocationView : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnCameraMoveListener {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding

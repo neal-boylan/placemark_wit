@@ -34,6 +34,11 @@ class PlacemarkJSONStore(private val context: Context) : PlacemarkStore {
         return placemarks
     }
 
+    override fun findById(id:Long) : PlacemarkModel? {
+        val foundPlacemark: PlacemarkModel? = placemarks.find { it.id == id }
+        return foundPlacemark
+    }
+
     override fun create(placemark: PlacemarkModel) {
         placemark.id = generateRandomId()
         placemarks.add(placemark)

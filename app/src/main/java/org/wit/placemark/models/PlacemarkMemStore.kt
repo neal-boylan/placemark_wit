@@ -16,6 +16,11 @@ class PlacemarkMemStore : PlacemarkStore {
         return placemarks
     }
 
+    override fun findById(id:Long) : PlacemarkModel? {
+        val foundPlacemark: PlacemarkModel? = placemarks.find { it.id == id }
+        return foundPlacemark
+    }
+
     override fun create(placemark: PlacemarkModel) {
         placemark.id = getId()
         placemarks.add(placemark)
