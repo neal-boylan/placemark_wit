@@ -38,16 +38,6 @@ class PlacemarkView : AppCompatActivity() {
             presenter.cachePlacemark(binding.placemarkTitle.text.toString(), binding.placemarkDescription.text.toString())
             presenter.doSetLocation()
         }
-
-        binding.btnAdd.setOnClickListener {
-            if (binding.placemarkTitle.text.toString().isEmpty()) {
-                Snackbar.make(binding.root, R.string.please_enter_title, Snackbar.LENGTH_LONG)
-                    .show()
-            } else {
-                // presenter.cachePlacemark(binding.placemarkTitle.text.toString(), binding.description.text.toString())
-                presenter.doAddOrSave(binding.placemarkTitle.text.toString(), binding.placemarkDescription.text.toString())
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,6 +49,15 @@ class PlacemarkView : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.save_button -> {
+                if (binding.placemarkTitle.text.toString().isEmpty()) {
+                    Snackbar.make(binding.root, R.string.please_enter_title, Snackbar.LENGTH_LONG)
+                        .show()
+                } else {
+                    // presenter.cachePlacemark(binding.placemarkTitle.text.toString(), binding.description.text.toString())
+                    presenter.doAddOrSave(binding.placemarkTitle.text.toString(), binding.placemarkDescription.text.toString())
+                }
+            }
             R.id.delete_button -> {
                 presenter.doDelete()
             }
@@ -72,7 +71,7 @@ class PlacemarkView : AppCompatActivity() {
     fun showPlacemark(placemark: PlacemarkModel) {
         binding.placemarkTitle.setText(placemark.title)
         binding.placemarkDescription.setText(placemark.description)
-        binding.btnAdd.setText(R.string.button_savePlacemark)
+        // binding.btnAdd.setText(R.string.button_savePlacemark)
         Picasso.get()
             .load(placemark.image)
             .into(binding.placemarkImage)

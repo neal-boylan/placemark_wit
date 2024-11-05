@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Placemark"
         tools:targetApi="34">
         <activity
-            android:name=".activities.PlacemarkMapView"
+            android:name=".views.map.PlacemarkMapView"
             android:exported="false"
             android:theme="@style/Theme.Placemark" />
 

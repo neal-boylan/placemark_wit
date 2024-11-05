@@ -1,4 +1,4 @@
-package org.wit.placemark.activities
+package org.wit.placemark.views.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -23,13 +23,13 @@ class PlacemarkMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
         app = application as MainApp
         binding = ActivityPlacemarkMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = getString(R.string.title_activity_placemark_maps)
         setSupportActionBar(binding.toolbar)
 
         presenter = PlacemarkMapPresenter(this)
 
         contentBinding = ContentPlacemarkMapsBinding.bind(binding.root)
 
+        contentBinding.mapView.onCreate(savedInstanceState)
         contentBinding.mapView.getMapAsync {
             presenter.doPopulateMap(it)
         }
